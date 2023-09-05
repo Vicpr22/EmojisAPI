@@ -100,6 +100,14 @@ app.delete("/emojis/:id", (req, res) => {
   });
 });
 
+app.use((req, res) => {
+  res.send({ success: false, error: "No route found." });
+});
+
+app.use((error, req, res, next) => {
+  res.send({ success: false, error: error.message });
+});
+
 app.listen(port, () => {
   console.log(`Express server is running on port ${port}`);
 });
